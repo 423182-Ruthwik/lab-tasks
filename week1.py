@@ -1,13 +1,13 @@
 import heapq
 
 class PuzzleState:
-    def _init_(self, board, moves=0, previous=None):
+    def __init__(self, board, moves=0, previous=None): 
         self.board = board
         self.moves = moves
         self.previous = previous
         self.priority = self.moves + self.manhattan()
 
-    def _lt_(self, other):
+    def __lt__(self, other): 
         return self.priority < other.priority
 
     def manhattan(self):
@@ -25,18 +25,29 @@ class PuzzleState:
 
     def get_neighbors(self):
         neighbors = []
-        x, y = next((i, j) for i, row in enumerate(self.board) for j, val in enumerate(row) if val == 0)
+        x, y = None, None  
+
+        for i, row in enumerate(self.board):
+            for j, val in enumerate(row):
+                if val == 0:
+                    x, y = i, j
+                    break
+            if x is not None:
+                break
+
+        
         directions = [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]
 
         for dx, dy in directions:
             if 0 <= dx < 3 and 0 <= dy < 3:
-                new_board = [row[:] for row in self.board]
+                new_board = [row[:] for row in self.board]  # deep copy
                 new_board[x][y], new_board[dx][dy] = new_board[dx][dy], new_board[x][y]
                 neighbors.append(PuzzleState(new_board, self.moves + 1, self))
         return neighbors
 
-    def _str_(self):
+    def __str__(self):  # fixed __str__
         return "\n".join(" ".join(map(str, row)) for row in self.board) + "\n"
+
 
 def solve_puzzle(initial_board):
     open_set = []
@@ -59,6 +70,7 @@ def solve_puzzle(initial_board):
 
     return None
 
+
 def print_solution(solution):
     if solution is None:
         print("No solution found!")
@@ -73,6 +85,7 @@ def print_solution(solution):
         for step in path:
             print(step)
             print("-" * 10)
+
 
 if __name__ == "__main__":
     initial_board = [
