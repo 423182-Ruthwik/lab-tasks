@@ -42,7 +42,7 @@ def hill_climb(board):
         else:
             return current, current_conf
 
-def random_restart_hill_climb(max_restarts=100, n=8):
+def restart_hill_climb(max_restarts=100, n=8):
     for _ in range(max_restarts):
         board = random_board(n)
         solution, conf = hill_climb(board)
@@ -51,7 +51,7 @@ def random_restart_hill_climb(max_restarts=100, n=8):
     return None
 
 if __name__ == "__main__":
-    sol = random_restart_hill_climb()
+    sol = restart_hill_climb()
     if sol:
         print("Solution found:", sol)
     else:
