@@ -30,7 +30,7 @@ def hill_climb(tour, cities, max_steps=500):
                 break
     return current, current_cost
 
-def random_restart_hill_climb(cities, max_restarts=20):
+def restart_hill_climb(cities, max_restarts=20):
     best_tour, best_cost = None, float("inf")
     n = len(cities)
     for _ in range(max_restarts):
@@ -44,7 +44,7 @@ def random_restart_hill_climb(cities, max_restarts=20):
 if __name__ == "__main__":
    
     cities = [(random.randint(0,100), random.randint(0,100)) for _ in range(10)]
-    tour, cost = random_restart_hill_climb(cities)
+    tour, cost = restart_hill_climb(cities)
     print("Best tour:", tour)
     print("Tour cost:", cost)
 
