@@ -9,7 +9,7 @@ class CSP:
         self.domain = domain
         self.graph = graph
 
-def _planar_graph(nodes):
+def planar_graph(nodes):
     edges = {(0,1),(1,2),(2,0)}
     faces = [(0,1,2)]
     neighbours = {0:[1,2], 1:[0,2], 2:[0,1]}
@@ -55,7 +55,7 @@ print("Nodes | Explored | Time(s) | Memory(MB)")
 print("---------------------------------------")
 
 for n in [100, 500, 1000]:
-    graph = random_planar_graph(n)
+    graph = planar_graph(n)
     variables = list(range(n))
     domain = {v: set(range(4)) for v in variables}
 
