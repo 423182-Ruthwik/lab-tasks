@@ -41,7 +41,7 @@ def hill_climb(state, max_steps=1000):
             break
     return current, current_h
 
-def random_restart_hill_climb(max_restarts=50):
+def restart_hill_climb(max_restarts=50):
     best_state, best_h = None, float("inf")
     for _ in range(max_restarts):
         state = random.sample(range(9), 9)
@@ -53,6 +53,6 @@ def random_restart_hill_climb(max_restarts=50):
     return best_state
 
 if __name__ == "__main__":
-    sol = random_restart_hill_climb()
+    sol = restart_hill_climb()
     print("Result:", sol, "Heuristic:", manhattan(sol))
 
