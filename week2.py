@@ -1,6 +1,5 @@
 import heapq
 
-# Helper class for representing the state of the puzzle
 class PuzzleState:
     def _init_(self, tiles, blank_index=None, parent=None, move=None, depth=0):
         self.tiles = tiles
@@ -39,7 +38,7 @@ class PuzzleState:
     def _hash_(self):
         return hash(tuple(self.tiles))
 
-# IDS (Iterative Deepening Search) implementation
+
 def iterative_deepening_search(initial_state, goal_state):
     def depth_limited_search(state, goal_state, limit):
         if state.is_goal(goal_state):
@@ -60,7 +59,7 @@ def iterative_deepening_search(initial_state, goal_state):
             return result
         depth += 1
 
-# UCS (Uniform Cost Search) implementation
+
 class PrioritizedItem:
     def _init_(self, priority, item):
         self.priority = priority
@@ -92,7 +91,7 @@ def uniform_cost_search_fixed(initial_state, goal_state):
 
     return None
 
-# Function to reconstruct the path from the goal state to the initial state
+
 def reconstruct_path(state):
     path = []
     while state is not None:
@@ -100,19 +99,18 @@ def reconstruct_path(state):
         state = state.parent
     return path[::-1]
 
-# Define the initial and goal states
+
 initial_state = PuzzleState([1, 2, 3, 4, 0, 5, 6, 7, 8])
 goal_state = PuzzleState([1, 2, 3, 4, 5, 6, 7, 8, 0])
 
-# Perform Iterative Deepening Search
+
 ids_solution = iterative_deepening_search(initial_state, goal_state)
 ids_solution_path = reconstruct_path(ids_solution)
 
-# Perform Uniform Cost Search
 ucs_solution_fixed = uniform_cost_search_fixed(initial_state, goal_state)
 ucs_solution_path_fixed = reconstruct_path(ucs_solution_fixed)
 
-# Output the solution paths
+
 print("IDS Solution Path:")
 for step in ids_solution_path:
     print(step)
