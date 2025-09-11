@@ -9,7 +9,7 @@ class CSP:
         self.domain = domain
         self.graph = graph
 
-def random_planar_graph(nodes):
+def _planar_graph(nodes):
     edges = {(0,1),(1,2),(2,0)}
     faces = [(0,1,2)]
     neighbours = {0:[1,2], 1:[0,2], 2:[0,1]}
